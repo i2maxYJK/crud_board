@@ -1,0 +1,89 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  width: 330px;
+  height: 319px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image-container {
+  position: relative;
+  height: 254px;
+}
+
+.ingredient-img {
+  width: 100%;
+  height: 254px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.description-container {
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.title {
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  letter-spacing: -0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.comments {
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  letter-spacing: -0.5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
