@@ -1,4 +1,4 @@
-import BoardList from "../component/BoardList";
+import Board_Page from "./Board_Page";
 // import { Link } from 'react-router-dom';
 
 function First_Page() {
@@ -8,7 +8,7 @@ function First_Page() {
                 "첫번째 페이지 입니다."
             </div>
             {/* <Link to="/">hello</Link> */}
-            <BoardList />
+            <Board_Page />
         </>
     )
 }
