@@ -16,7 +16,7 @@ function Insert(){
             console.log(boarditem); 
 
             if (boarditem) {
-                const body = JSON.stringify({ tnb : boarditem });
+                const body = JSON.stringify(boarditem);
                 const response = await fetch("/test/api/test/i_tnb_item",
                 {
                     method : "POST",
