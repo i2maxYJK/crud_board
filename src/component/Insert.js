@@ -1,49 +1,55 @@
-// import { useEffect, useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
-// function Insert(){
-//     const [testList, setTestList] = useState([]);
-//     const inputRef = useRef();
+function Insert(){
+    const [testList, setTestList] = useState([]);
+    const inputRef1 = useRef();
+    const inputRef2 = useRef();
 
-//     const submitName = useCallback(
-//         async (e) => {
+    const submitName = useCallback(
+        async (e) => {
+            const boarditem = {
+                id : 999,
+                name : inputRef1.current.value,
+                content : inputRef2.current.value,
+            }
 
-//             const input = inputRef.current;
-//             const value = input?.value;
+            console.log(boarditem); 
 
-//             if (value) {
-//                 const body = JSON.stringify({ test1 : value });
-//                 const response = await fetch("/cocktail/api/post/i_test",
-//                 {
-//                     method : "POST",
-//                     headers : {
-//                         "Content-Type" : "application/json",
-//                     },
-//                     body : body,
-//                 });
+            if (boarditem) {
+                const body = JSON.stringify({ tnb : boarditem });
+                const response = await fetch("/test/api/test/i_tnb_item",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
 
-//                 if (response.ok) {
-//                     setTestList([...testList, value]);
-//                 }
-//             }
+                if (response.ok) {
+                    setTestList([...testList, boarditem]);
+                }
+            }
 
-//         },
-//         [testList]
-//     )
+        },
+        [testList]
+    )
 
-//     return (
-//         <>
-//             <input ref={inputRef} placeholder="이름"/>
-//             <button type="button" onClick={(e) => submitName(e)}>
-//                 제출하기
-//             </button>
+    return (
+        <>
+            <input ref={inputRef1} placeholder="제목"/>
+            <input ref={inputRef2} placeholder="내용"/>
+            <button type="button" onClick={(e) => submitName(e)}>
+                등록하기
+            </button>
 
-//             {testList.map((name) => (
-//                 <div>
-//                     {name}
-//                 </div>
-//             ))}
-//         </>
-//     );
-// };
+            {/* {testList.map((name) => (
+                <div>
+                    {name}
+                </div>
+            ))} */}
+        </>
+    );
+};
 
-// export default Insert
+export default Insert

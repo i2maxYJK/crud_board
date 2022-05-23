@@ -1,5 +1,6 @@
 import Board_Page from "./Board_Page";
 // import { Link } from 'react-router-dom';
+import Insert from "../component/Insert";
 
 function First_Page() {
     return (
@@ -9,6 +10,7 @@ function First_Page() {
             </div>
             {/* <Link to="/">hello</Link> */}
             <Board_Page />
+            <Insert />
         </>
     )
 }
