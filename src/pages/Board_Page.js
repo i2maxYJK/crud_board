@@ -15,6 +15,8 @@ function Board_Page() {
     // 게시물 아이템 댓글
     const [boardItemComment, setboardItemComment] = useState([]);
 
+    const [boardNumber, setBoardNumber] = useState({LNUM : 1});
+
     useEffect( () => {
         async function fetchItems() {
             const response = await fetch(
@@ -63,7 +65,7 @@ function Board_Page() {
                 });
             
                 const result = await response.json();
-    
+                setBoardNumber(value);
                 setboardList(result);
             }
         }
@@ -106,15 +108,7 @@ function Board_Page() {
 
     // ***** [작업중] 게시물 수정
     const boardItemUpdate = useCallback(
-        async (boardItem) => {
-
-            const bitem = {
-                id : boardItem.ID,
-                name : boardItem.NAME,
-                content : boardItem.CONTENT,
-            }
-            console.log(bitem);
-
+        async (bitem) => {
             if (bitem) {
                 const body = JSON.stringify(bitem);
                 const response = await fetch("/test/api/test/u_tnb_item",
@@ -125,10 +119,11 @@ function Board_Page() {
                     },
                     body : body,
                 });
-
+                await boardListNumClick(boardNumber);
                 if (response.ok) {
                     console.log("성공");
                 }
+
             }
         }
     )
@@ -139,12 +134,10 @@ function Board_Page() {
             <>
             {
                 boardItem.map((boardItem) => (
-                    <>
-                    <BoardItem items = {boardItem}/>
-                    <button type="button" onClick={() => boardItemUpdate(boardItem)}>
-                    수정
-                    </button>
-                    </>
+                    <div key = {`boardItem_${boardItem.ID}`}>
+                    <BoardItem items = {boardItem} onSubmit = {boardItemUpdate}
+                    />
+                    </div>
                 ))
             }
             {
