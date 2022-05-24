@@ -1,7 +1,7 @@
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
 function Insert(){
-    const [testList, setTestList] = useState([]);
+    // const [testList, setTestList] = useState([]);
     const inputRef1 = useRef();
     const inputRef2 = useRef();
 
@@ -13,7 +13,7 @@ function Insert(){
                 content : inputRef2.current.value,
             }
 
-            console.log(boarditem); 
+            console.log(boarditem);
 
             if (boarditem) {
                 const body = JSON.stringify(boarditem);
@@ -27,12 +27,12 @@ function Insert(){
                 });
 
                 if (response.ok) {
-                    setTestList([...testList, boarditem]);
+                    console.log("성공");
                 }
             }
 
         },
-        [testList]
+        // [testList]
     )
 
     return (

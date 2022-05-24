@@ -72,7 +72,7 @@ function Board_Page() {
     // 리스트 행 클릭 이벤트
     const boardRowClick = useCallback(
         async (boardItem) => {
-            console.log(boardItem);
+            // console.log(boardItem);
             const value = boardItem.RNUM;
 
             if (value) {
@@ -104,13 +104,47 @@ function Board_Page() {
         }
     )
 
+    // ***** [작업중] 게시물 수정
+    const boardItemUpdate = useCallback(
+        async (boardItem) => {
+
+            const bitem = {
+                id : boardItem.ID,
+                name : boardItem.NAME,
+                content : boardItem.CONTENT,
+            }
+            console.log(bitem);
+
+            if (bitem) {
+                const body = JSON.stringify(bitem);
+                const response = await fetch("/test/api/test/u_tnb_item",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
+
+                if (response.ok) {
+                    console.log("성공");
+                }
+            }
+        }
+    )
+
     // 실제 출력 화면
     if (boardList.length > 0) {
         return(
             <>
             {
                 boardItem.map((boardItem) => (
+                    <>
                     <BoardItem items = {boardItem}/>
+                    <button type="button" onClick={() => boardItemUpdate(boardItem)}>
+                    수정
+                    </button>
+                    </>
                 ))
             }
             {
