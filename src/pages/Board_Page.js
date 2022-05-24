@@ -75,7 +75,7 @@ function Board_Page() {
     const boardRowClick = useCallback(
         async (boardItem) => {
             // console.log(boardItem);
-            const value = boardItem.RNUM;
+            const value = boardItem.ID;
 
             if (value) {
                 const response1 = await fetch("test/api/test/s_tnb_item?id=" + value,
@@ -128,6 +128,28 @@ function Board_Page() {
         }
     )
 
+    // ***** [작업중] 게시물 수정
+    const boardItemCommentUpdate = useCallback(
+        async (bitemC) => {
+            if (bitemC) {
+                const body = JSON.stringify(bitemC);
+                const response = await fetch("/test/api/test/u_tnc_item",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
+                
+                if (response.ok) {
+                    console.log("성공");
+                }
+
+            }
+        }
+    )
+
     // 실제 출력 화면
     if (boardList.length > 0) {
         return(
@@ -142,7 +164,10 @@ function Board_Page() {
             }
             {
                 boardItemComment.map((boardItemComment) => (
-                    <BoardItemComment items = {boardItemComment}/>
+                    <div key = {`boardItemComment_${boardItemComment.SEQ}`}>
+                    <BoardItemComment items = {boardItemComment} onSubmit = {boardItemCommentUpdate}
+                    />
+                    </div>
                 ))
             }
             <table>

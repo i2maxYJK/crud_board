@@ -1,9 +1,48 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const BoardItem = (props) => {
     const [id, setID] = useState(props.items.ID);
     const [name, setName] = useState(props.items.NAME);
     const [content, setContent] = useState(props.items.CONTENT);
+
+    // ***** [작업중] 게시물 삭제
+    const boardItemDel = useCallback(
+        async (bitem) => {
+            if (bitem) {
+                const body = JSON.stringify(bitem);
+                const response = await fetch("/test/api/test/d_tnb_item",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
+
+                if (response.ok) {
+                    console.log("성공 1/2");
+                }
+
+            }
+
+            if (bitem) {
+                const body = JSON.stringify(bitem.id);
+                const response = await fetch("/test/api/test/d_tnc_item_all",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
+
+                if (response.ok) {
+                    console.log("성공 2/2");
+                }
+
+            }
+        }
+    )
 
     return (
         <>
@@ -34,6 +73,15 @@ const BoardItem = (props) => {
             })
             }>
                 수정
+            </button>
+
+            <button type="button" onClick={() => boardItemDel({
+                id: id,
+                name: name,
+                content: content
+            })
+            }>
+                삭제
             </button>
         </>
     );
