@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import BoardRow from "../component/BoardRow";
 import BoardItem from "../component/BoardItem";
 import BoardItemComment from "../component/BoardItemComment";
@@ -16,6 +16,9 @@ function Board_Page() {
     const [boardItemComment, setboardItemComment] = useState([]);
 
     const [boardNumber, setBoardNumber] = useState({LNUM : 1});
+
+    const comment_id = useRef();
+    const comment_text = useRef();
 
     useEffect( () => {
         async function fetchItems() {
@@ -128,7 +131,7 @@ function Board_Page() {
         }
     )
 
-    // ***** [작업중] 게시물 수정
+    // 게시물 수정
     const boardItemCommentUpdate = useCallback(
         async (bitemC) => {
             if (bitemC) {
@@ -150,21 +153,59 @@ function Board_Page() {
         }
     )
 
+    // ***** [작업중] 댓글 등록
+    const insertComment = useCallback(
+        async (e) => {
+            const bitemC = {
+                id : comment_id.current.value,
+                seq : 999,
+                content : comment_text.current.value,
+            }
+
+            console.log(bitemC);
+
+            if (bitemC) {
+                const body = JSON.stringify(bitemC);
+                const response = await fetch("test/api/test/i_tnc_item",
+                {
+                    method : "POST",
+                    headers : {
+                        "Content-Type" : "application/json",
+                    },
+                    body : body,
+                });
+
+                if (response.ok) {
+                    console.log("성공");
+                }
+            }
+
+        },
+        // [testList]
+    )
+
     // 실제 출력 화면
     if (boardList.length > 0) {
         return(
             <>
             {
                 boardItem.map((boardItem) => (
+                    <>
                     <div key = {`boardItem_${boardItem.ID}`}>
                     <BoardItem items = {boardItem} onSubmit = {boardItemUpdate}
                     />
                     </div>
+                    <input ref={comment_id} value={boardItem.ID} hidden/>
+                    <input ref={comment_text} placeholder="댓글 입력창"/>
+                    <button type="button" onClick={insertComment}>
+                        댓글 등록하기
+                    </button>
+                    </>
                 ))
             }
             {
                 boardItemComment.map((boardItemComment) => (
-                    <div key = {`boardItemComment_${boardItemComment.SEQ}`}>
+                    <div key = {`boardItemComment_${boardItemComment.ID}${boardItemComment.SEQ}`}>
                     <BoardItemComment items = {boardItemComment} onSubmit = {boardItemCommentUpdate}
                     />
                     </div>
@@ -190,7 +231,7 @@ function Board_Page() {
             <table>
             {
                 boardNumList.map((boardNum) => (
-                    <button id={boardNum.LNUM} type="button" onClick={() => boardListNumClick(boardNum)}>
+                    <button key = {`boardNum_${boardNum.LNUM}`} id={boardNum.LNUM} type="button" onClick={() => boardListNumClick(boardNum)}>
                     <BoardNum items = {boardNum}/>
                     </button>
                 ))

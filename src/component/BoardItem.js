@@ -22,11 +22,10 @@ const BoardItem = (props) => {
                 if (response.ok) {
                     console.log("성공 1/2");
                 }
-
             }
 
             if (bitem) {
-                const body = JSON.stringify(bitem.id);
+                const body = JSON.stringify(bitem);
                 const response = await fetch("/test/api/test/d_tnc_item_all",
                 {
                     method : "POST",
@@ -39,7 +38,6 @@ const BoardItem = (props) => {
                 if (response.ok) {
                     console.log("성공 2/2");
                 }
-
             }
         }
     )

@@ -26,6 +26,7 @@ const BoardItemComment = (props) => {
             }
         }
     )
+    
     return (
         <>
             <div id="itemComment" style={{border: "1px solid #444444",width: "800px",margin: "5px",padding: "5px"}}>
@@ -51,7 +52,7 @@ const BoardItemComment = (props) => {
                 content: content
             })
             }>
-                수정
+                댓글수정
             </button>
 
             <button type="button" onClick={() => boardItemCommentDel({
@@ -60,7 +61,7 @@ const BoardItemComment = (props) => {
                 content: content
             })
             }>
-                삭제
+                댓글삭제
             </button>
         </>
     );
