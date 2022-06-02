@@ -5,7 +5,7 @@ const BoardItem = (props) => {
     const [name, setName] = useState(props.items.NAME);
     const [content, setContent] = useState(props.items.CONTENT);
 
-    // ***** [작업중] 게시물 삭제
+    // 게시물 삭제
     const boardItemDel = useCallback(
         async (bitem) => {
             if (bitem) {

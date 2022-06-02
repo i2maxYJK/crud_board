@@ -109,7 +109,7 @@ function Board_Page() {
         }
     )
 
-    // ***** [작업중] 게시물 수정
+    // 게시물 수정
     const boardItemUpdate = useCallback(
         async (bitem) => {
             if (bitem) {
@@ -131,7 +131,7 @@ function Board_Page() {
         }
     )
 
-    // 게시물 수정
+    // 게시물 댓글 수정
     const boardItemCommentUpdate = useCallback(
         async (bitemC) => {
             if (bitemC) {
@@ -153,7 +153,7 @@ function Board_Page() {
         }
     )
 
-    // ***** [작업중] 댓글 등록
+    // 댓글 등록
     const insertComment = useCallback(
         async (e) => {
             const bitemC = {
@@ -231,7 +231,10 @@ function Board_Page() {
             <table>
             {
                 boardNumList.map((boardNum) => (
-                    <button key = {`boardNum_${boardNum.LNUM}`} id={boardNum.LNUM} type="button" onClick={() => boardListNumClick(boardNum)}>
+                    <button key = {`boardNum_${boardNum.LNUM}`} 
+                        id={boardNum.LNUM} 
+                        type="button" 
+                        onClick={() => boardListNumClick(boardNum)}>
                     <BoardNum items = {boardNum}/>
                     </button>
                 ))
